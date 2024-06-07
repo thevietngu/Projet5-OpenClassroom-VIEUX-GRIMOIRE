@@ -1,8 +1,7 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const uniqueValidator = require("mongoose-unique-validator");
 
-const uniqueValidator = require('mongoose-unique-validator');
-
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
@@ -11,12 +10,12 @@ const userSchema = mongoose.Schema({
       validator: function (value) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
       },
-      message: 'Le format de l\'adresse e-mail est incorrect',
+      message: "Le format de l'adresse e-mail est incorrect",
     },
   },
   password: { type: String, required: true },
 });
 
-userSchema.plugin(uniqueValidator);
+userSchema.plugin(uniqueValidator, { message: "Cet email est déjà utilisé" });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);
