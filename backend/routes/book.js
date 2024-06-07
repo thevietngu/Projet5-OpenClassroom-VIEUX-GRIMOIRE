@@ -7,7 +7,7 @@ const multer = require("../middleware/multer-config");
 
 const bookCtrl = require("../controllers/book");
 
-// Routes sécurisés
+// Routes sécurisés, authentifiés
 router.post("/", auth, multer, bookCtrl.createBook);
 router.post("/:id/rating", auth, bookCtrl.addRating);
 router.put("/:id", auth, multer, bookCtrl.modifyBook);

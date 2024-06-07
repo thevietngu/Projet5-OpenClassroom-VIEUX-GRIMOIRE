@@ -93,7 +93,6 @@ exports.deleteBook = (req, res, next) => {
     .then((book) => {
       // Vérifie si l'utilisateur qui a fait la requête est bien l'utilisateur qui a créé le livre.
       if (book.userId != req.auth.userId) {
-        // Si ce n'est pas le cas, renvoie une réponse 401 (non autorisé).
         res.status(401).json({ message: "Non autorisé" });
       } else {
         // Extrait le nom du fichier de l'URL de l'image.

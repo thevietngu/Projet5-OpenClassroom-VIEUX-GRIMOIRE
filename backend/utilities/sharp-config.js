@@ -10,7 +10,6 @@ const MIME_TYPES = {
   'image/webp': 'webp',
 };
 
-// Fonction asynchrone pour optimiser une image.
 async function optimizeImage(file) {
   // Récupère le chemin absolu du fichier téléchargé.
   const absolutePath = path.resolve(file.path);
@@ -23,13 +22,13 @@ async function optimizeImage(file) {
 
   // Utilise Sharp pour redimensionner et convertir l'image au format WebP.
   await sharp(absolutePath)
-    .resize({ width: 800, fit: 'contain' }) // Redimensionne l'image à une largeur de 800 pixels.
-    .webp() // Convertit l'image au format WebP.
-    .toFile(destinationPath); // Sauvegarde l'image optimisée au chemin de destination.
+    .resize({ width: 800, fit: 'contain' })
+    .webp()
+    .toFile(destinationPath);
 
   // Supprime le fichier d'origine.
   fs.unlink(absolutePath, (err) => {
-    if (err) console.log(err); // Affiche une erreur si la suppression échoue.
+    if (err) console.log(err);
   });
 
   // Renvoie le nouveau chemin du fichier optimisé.
